@@ -1,7 +1,5 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const promiseMysql = require("promise-mysql");
-const consoleTable = require("console.table");
 
 const connection = mysql.createConnection({
 
@@ -88,5 +86,33 @@ function search() {
 }
 
 function viewAllEmployees(){
-    const query = ""
+    const query = "";
+    connection.query(query,(error,res)=>{
+      if(error) return error;
+
+      console.log("\n");
+      console.log(res);
+      search();
+    });
+}
+
+function viewAllEmployeesRole(){
+    
+    inquirer.prompt({
+        name:"role",
+        type:"input",
+        message:"What employee role would you like to search for?"
+    }).then(function (answer){
+        const query = "";
+        connection.query(query,{role: answer.role}, function(error,res){
+         for(var i = 0; i < res.length; i++){
+             console.log("Employee Role: " + res[i].title);
+         }
+         search();
+        });
+    })
+}
+
+function viewAllEmployeesManager(){
+    
 }
