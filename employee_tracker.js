@@ -84,35 +84,49 @@ function search() {
             }
         });
 }
-
-function viewAllEmployees(){
+// View all employees:
+function viewAllEmployees() {
     const query = "";
-    connection.query(query,(error,res)=>{
-      if(error) return error;
+    connection.query(query, (error, res) => {
+        if (error) return error;
 
-      console.log("\n");
-      console.log(res);
-      search();
+        console.log("\n");
+        console.log(res);
+        search();
     });
 }
 
-function viewAllEmployeesRole(){
-    
-    inquirer.prompt({
-        name:"role",
-        type:"input",
-        message:"What employee role would you like to search for?"
-    }).then(function (answer){
-        const query = "";
-        connection.query(query,{role: answer.role}, function(error,res){
-         for(var i = 0; i < res.length; i++){
-             console.log("Employee Role: " + res[i].title);
-         }
-         search();
+// View all employees by role:
+function viewAllEmployeesRole() {
+    const query = "SELECT title FROM role";
+    let roleArray = [];
+    connection.query(query, (error, res) => {
+        if (error) return error;
+
+    }).then(function (roles) {
+        for (var i = 0; i < roles.length; i++) {
+            roleArray.push(roles[i].title);
+        }
+    }).then(() => {
+
+        inquirer.prompt({
+            name: "role",
+            type: "list",
+            message: "Which role would you like to search?",
+            choices: "roleArray"
+        }).then(function (answer) {
+            const query = "";
+            connection.query(query, function (error, res) {
+                if (error) return error;
+                console.log("\n");
+                console.table(res);
+                search();
+            });
         });
-    })
+    });
+
 }
 
-function viewAllEmployeesManager(){
-    
+function viewAllEmployeesManager() {
+
 }
