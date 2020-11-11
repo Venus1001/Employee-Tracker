@@ -88,7 +88,8 @@ function search() {
 }
 // View all employees:
 function viewAllEmployees() {
-    const query = "";
+    const query = "SELECT e.id, e.first_name, e.last_name, role.title, department.name AS department, role.salary,concat(m.first_name, ' ' ,  m.last_name) AS manager FROM employee e LEFT JOIN employee m ON e.manager_id = m.id INNER JOIN role ON e.role_id = role.id INNER JOIN department ON role.department_id = department.id ORDER BY ID ASC;";
+    
     connection.query(query, (error, res) => {
         if (error) return error;
 
@@ -201,7 +202,7 @@ function deleteEmployee() {
     let employeeArray = [];
 
     promisemysql.createConnection(connectionProperties).then((connection) => {
-        return connection.query("");
+        return connection.query("SELECT employee.id, concat(employee.first_name, ' ' ,  employee.last_name) AS employee FROM employee ORDER BY Employee ASC")");
     }).then((employess) => {
         for (var i = 0; i < employess.length; i++) {
             employeeArray.push(employess[i].employee);
@@ -249,8 +250,8 @@ function addEmployees() {
 
     promisemysql.createConnection(connectionProperties).then((connect) => {
         return Promise.call([
-            connect.query(),
-            connect.query()
+            connect.query('SELECT id, title FROM role ORDER BY title ASC'),
+            connect.query("SELECT employee.id, concat(employee.first_name, ' ' , employee.last_name) AS Employee FROM employee ORDER BY Employee ASC")
         ]);
     }).then(([role, managers]) => {
         for (var i = 0; i < roles.length; i++) {
@@ -379,8 +380,8 @@ function addEmployeeRole() {
                     }
 
                     connection.query(`INSERT INTO role (title, salary, department_id)
-                 VALUES ("${answer.roleTitle}", ${answer.salary}, ${deptID})`, (err, res) => {
-                        if (err) return err;
+                 VALUES ("${answer.roleTitle}", ${answer.salary}, ${deptID})`, (error, res) => {
+                        if (error) return error;
                         console.log(`\n ROLE ${answer.roleTitle} ADDED...\n`);
                         search();
                     });

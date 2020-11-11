@@ -42,27 +42,27 @@ VALUES (8, "Solution Architect", 190000, 3);
 ----- Employees Seeds 
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES (1, "John", "Chen", 1, 67);
+VALUES (4, "Bob", "Chen", 3, null);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES (2, "Mike", "Harry", 2, null);
+VALUES (5, "Mary", "Kate", 4, null);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES (3, "Jack", "Danil", 3, null);
+VALUES (9, "Jack", "Danil", 6,null);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES (4, "Kate", "Hong", 4, null);
+VALUES (1, "Kate", "Hong", 1, null);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES (5, "Kelly", "Zhang", 5, null);
+VALUES (10, "Kelly", "Zhang", 5, null);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES (6, "Bella", "Grace", 6, null);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES (7, "Rose", "Emma", 7, 77);
+VALUES (11, "Rose", "Emma", 6, 10);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-VALUES (8, "Kaylan", "Bool", 8, 60);
+VALUES (8, "Kaylan", "Bool", 7, 10);
 
 
